@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dashboard.ViewModel
 {
-    internal interface INavigationService
+    public interface INavigationService
     {
         void DisplayTransactions(TrasactionViewModel vm);
     }

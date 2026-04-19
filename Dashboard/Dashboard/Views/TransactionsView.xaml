@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TransactionsView" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="Transactions Screen"
+        <TextBlock Text="{Binding Title}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="24"/>

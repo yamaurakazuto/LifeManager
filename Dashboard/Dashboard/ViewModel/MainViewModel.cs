@@ -8,20 +8,21 @@ using Dashboard.Commands;
 
 namespace Dashboard.ViewModel
 {
-    //internal class MainViewModel
-    //{
+    public class MainViewModel
+    {
+        private readonly INavigationService _navigationService;
+        public ICommand NavigateToTransactionsCommand { get; }
 
-    //    public ICommand NavigateToTransactionsCommand { get; }
+        public MainViewModel(INavigationService navigationService)
+        {
+            NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
+            _navigationService = navigationService;
+        }
 
-    //    public MainViewModel()
-    //    {
-    //        NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
-    //    }
-
-    //    private void OpenTransactions()
-    //    {
-    //        var transactionsWindow = new TransactionsView(); 
-    //        transactionsWindow.Show();
-    //    }
-    //}
+        private void OpenTransactions()
+        {
+            var transactionsViewModel = new TrasactionViewModel();
+            _navigationService.DisplayTransactions(transactionsViewModel);
+        }
+    }
 }

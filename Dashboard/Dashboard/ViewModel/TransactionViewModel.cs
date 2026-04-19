@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dashboard.ViewModel
 {
-    internal class TrasactionViewModel
+    public class TrasactionViewModel
     {
+        public string Title { get; set; } = "Transactions";
     }
 }
