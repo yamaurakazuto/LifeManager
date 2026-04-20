@@ -1,4 +1,7 @@
-﻿using System;
+﻿// アプリケーションのメイン ViewModel です。このクラスはメインウィンドウ用の
+// コマンドや状態を公開し、提供された INavigationService を呼び出して
+// ナビゲーションを調整します。
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +16,20 @@ namespace Dashboard.ViewModel
         private readonly INavigationService _navigationService;
         public ICommand NavigateToTransactionsCommand { get; }
 
+        /// <summary>
+        /// MainViewModel の新しいインスタンスを作成し、ナビゲーションを設定します。
+        /// </summary>
+        /// <param name="navigationService">ナビゲーション操作を実行するサービス。</param>
         public MainViewModel(INavigationService navigationService)
         {
             NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
             _navigationService = navigationService;
         }
 
+        /// <summary>
+        /// コマンド実行時の処理。収支用の ViewModel を生成し、
+        /// ナビゲーションサービスに対して収支画面の表示を要求します。
+        /// </summary>
         private void OpenTransactions()
         {
             var transactionsViewModel = new TrasactionViewModel();

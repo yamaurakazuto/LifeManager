@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿// メインウィンドウのコードビハインドです。
+// このファイルには `MainWindow` の最小限の相互作用ロジックが含まれ、
+// 動作は `MainViewModel` へのデータバインディングに依存します。
+// 必要に応じて UI イベントハンドラはここに配置します。
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +20,9 @@ namespace Dashboard
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// MainWindow の新しいインスタンスを初期化し、XAML を読み込みます。
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
