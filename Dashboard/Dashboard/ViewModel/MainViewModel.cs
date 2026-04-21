@@ -16,6 +16,8 @@ namespace Dashboard.ViewModel
         private readonly INavigationService _navigationService;
         public ICommand NavigateToTransactionsCommand { get; }
 
+        public ICommand NavigateToRirekiCommand { get; }
+
         /// <summary>
         /// MainViewModel の新しいインスタンスを作成し、ナビゲーションを設定します。
         /// </summary>
@@ -23,6 +25,9 @@ namespace Dashboard.ViewModel
         public MainViewModel(INavigationService navigationService)
         {
             NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
+            _navigationService = navigationService;
+
+            NavigateToRirekiCommand = new RelayCommand(OpenRireki);
             _navigationService = navigationService;
         }
 
@@ -34,6 +39,12 @@ namespace Dashboard.ViewModel
         {
             var transactionsViewModel = new TrasactionViewModel();
             _navigationService.DisplayTransactions(transactionsViewModel);
+        }
+
+        private void OpenRireki()
+        {
+            var rirekiViewModel = new RirekiViewModel();
+            _navigationService.DisplayRireki(rirekiViewModel);
         }
     }
 }

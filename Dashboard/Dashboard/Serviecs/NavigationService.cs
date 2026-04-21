@@ -23,5 +23,12 @@ namespace Dashboard.Serviecs
             view.DataContext = vm;
             view.Show();
         }
+
+        public void DisplayRireki(ViewModel.RirekiViewModel vm)
+        {
+            var view = new RirekiWindow();
+            view.DataContext = vm;
+            view.Show();
+        }
     }
 }

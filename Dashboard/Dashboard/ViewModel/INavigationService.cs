@@ -18,5 +18,13 @@ namespace Dashboard.ViewModel
         /// </summary>
         /// <param name="vm">表示する収支画面の ViewModel。</param>
         void DisplayTransactions(TrasactionViewModel vm);
+
+        /// <summary>
+        /// 収支履歴画面を表示するよう要求します。
+        /// 実装は収支履歴ウィンドウを作成またはアクティブにし、
+        /// 引数の <see cref="RirekiViewModel"/> を DataContext に設定してください。
+        /// </summary>
+        /// <param name="vm">表示する収支履歴画面の ViewModel。</param>
+        void DisplayRireki(RirekiViewModel vm);
     }
 }

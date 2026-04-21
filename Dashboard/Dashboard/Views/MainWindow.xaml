@@ -33,7 +33,13 @@
 
             </StackPanel>
 
-                
+            <Button Content="収支履歴"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="10"
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                    Command="{Binding NavigateToRirekiCommand}"
+                />
         </Grid>
     </Grid>
 </Window>
