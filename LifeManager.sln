@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36930.0 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeManager", "..\..\..\生活管理アプリ\Dashboard\Dashboard\LifeManager.csproj", "{5CB2F6FD-895B-6D0E-4735-1273C0AA379D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeManager", "LifeManager.csproj", "{5CB2F6FD-895B-6D0E-4735-1273C0AA379D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3800DE27-6840-4574-ADC4-78189E273C40}
+		SolutionGuid = {A41F4749-9655-40EE-8470-45A6579E0641}
 	EndGlobalSection
 EndGlobal
