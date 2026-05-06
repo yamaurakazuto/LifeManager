@@ -16,13 +16,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LifeManager.Commands;
+using System.ComponentModel;
+using System.ComponentModel;
 
 namespace LifeManager.ViewModel
 {
 
    
-    public class TransactionViewModel
+    public class TransactionViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         public ICommand LoadCommand { get; }
 
         private readonly GetDailySummaryUseCase _UseCase;

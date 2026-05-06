@@ -10,7 +10,7 @@ using LifeManager.ViewModel;
 
 namespace LifeManager.Services  
 {
-    internal class NavigationService : ViewModel.INavigationService
+    public class NavigationService : LifeManager.ViewModel.INavigationService
     {
         /// <summary>
         /// 収支ウィンドウを作成して表示します。引数の ViewModel を DataContext に設定し、

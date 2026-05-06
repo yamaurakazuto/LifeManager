@@ -2,6 +2,7 @@
 // このファイルには `MainWindow` の最小限の相互作用ロジックが含まれ、
 // 動作は `MainViewModel` へのデータバインディングに依存します。
 // 必要に応じて UI イベントハンドラはここに配置します。
+using LifeManager.ViewModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,8 +11,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LifeManager.Services;
 
 namespace LifeManager.Views
 {
@@ -26,6 +27,9 @@ namespace LifeManager.Views
         public MainWindow()
         {
             InitializeComponent();
+            var navigationService = new NavigationService();
+
+            DataContext = new MainViewModel(navigationService);
         }
 
        
