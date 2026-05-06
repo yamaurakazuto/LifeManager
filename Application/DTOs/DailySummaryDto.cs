@@ -32,6 +32,6 @@ namespace LifeManager.Application.DTOs
         // 計算はどこでやるか: 
         //・UseCaseで計算して、このプロパティにセットする 
         ///  </summary>
-        public decimal Totalt { get; set; }
+        public decimal Total { get; set; }
     }
 }

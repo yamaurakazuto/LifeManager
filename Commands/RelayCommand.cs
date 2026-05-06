@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Dashboard.Commands
+namespace LifeManager.Commands
 {
     public class RelayCommand : ICommand
     {

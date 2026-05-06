@@ -15,8 +15,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LifeManager.ViewModel;
 
-namespace Dashboard.Views
+
+namespace LifeManager.Views
 {
     /// <summary>
     /// TransactionsView.xaml の相互作用ロジック
@@ -30,6 +32,7 @@ namespace Dashboard.Views
         public TransactionsView()
         {
             InitializeComponent();
+            DataContext = new TransactionViewModel();
         }
     }
 }

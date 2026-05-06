@@ -7,42 +7,51 @@
 // ・状態を持つことに専念する（表示のためのデータ）
 // ・UIとUseCaseの橋渡し役
 
+using LifeManager.Application.DTOs;
+using LifeManager.Application.UseCases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LifeManager.Application.DTOs;
+using System.Windows.Input;
+using LifeManager.Commands;
 
-namespace Dashboard.ViewModel
+namespace LifeManager.ViewModel
 {
-    public class TrasactionViewModel
+
+   
+    public class TransactionViewModel
     {
+        public ICommand LoadCommand { get; }
 
-       
-        /// 現在選択されている日付        
-        /// なぜ必要か:
-        /// ・ユーザーがどの日付の収支を見たいかを表す入力値
-        /// ・この値をUseCaseに渡して、その日のデータを取得する
-        public DateTime SelectDate { get; set; }
+        private readonly GetDailySummaryUseCase _UseCase;
 
-        /// <summary>
-        /// 合計金額
-        /// </summary>
+        // 現在選択されている日付        
+        public DateTime SelectDate { get; set; } = DateTime.Today;
+
+        // 合計金額
         public Decimal Total { get; set; }
 
-        /// <summary>
-        // 取引一覧
-        // なぜIEnumerableか:
-        // ・「一覧として扱う」ことを表現したい（コレクションの抽象化） 
-        // ・内部実装（Listなど）に依存させないため 
-        // なぜprivate setか: /// ・外部（View）から直接書き換えさせないため 
-        // ・更新はViewModel内部 or UseCaseの結果のみで行う /// /// なぜDTOを使うか: 
-        // ・UseCaseから受け取るデータ形式をそのままUIに渡すため 
-        // ・UIとビジネスロジックの依存を切る
-        /// </summary>
+
+        //外から変更できないようにprivate setにする
         public IEnumerable<TransactionDto> Transactions { get; private set; } = new List<TransactionDto>();
 
+        public TransactionViewModel()
+        {
+            _UseCase = new GetDailySummaryUseCase();
+            LoadCommand = new RelayCommand(Load);
+
+        }
+
+        public void Load()
+        {
+            var result = _UseCase.Execute(SelectDate);
+
+            Transactions = result.Transactions;
+
+            Total = result.Total;
+        }
 
 
     }

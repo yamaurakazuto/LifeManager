@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dashboard.ViewModel
+namespace LifeManager.ViewModel
 {
     public interface INavigationService
     {
@@ -17,7 +17,7 @@ namespace Dashboard.ViewModel
         /// 引数の <see cref="TrasactionViewModel"/> を DataContext に設定してください。
         /// </summary>
         /// <param name="vm">表示する収支画面の ViewModel。</param>
-        void DisplayTransactions(TrasactionViewModel vm);
+        void DisplayTransactions(TransactionViewModel vm);
 
         /// <summary>
         /// 収支履歴画面を表示するよう要求します。

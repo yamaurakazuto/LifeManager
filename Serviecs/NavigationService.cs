@@ -1,13 +1,14 @@
 ﻿// INavigationService の実装です。ビューのインスタンスを生成し、
 // 提供された ViewModel を DataContext に設定してウィンドウを表示する責任を持ちます。
-using Dashboard.Views;
+using LifeManager.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LifeManager.ViewModel;
 
-namespace Dashboard.Serviecs
+namespace LifeManager.Services  
 {
     internal class NavigationService : ViewModel.INavigationService
     {
@@ -16,7 +17,7 @@ namespace Dashboard.Serviecs
         /// ビューがデータへバインドできるようにします。
         /// </summary>
         /// <param name="vm">DataContext に設定する収支用の ViewModel。</param>
-        public void DisplayTransactions(ViewModel.TrasactionViewModel vm)
+        public void DisplayTransactions(ViewModel.TransactionViewModel vm)
         {
             var view = new TransactionsView();
 
