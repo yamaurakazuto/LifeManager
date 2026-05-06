@@ -3,13 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Dashboard.Views"
+        xmlns:local="clr-namespace:LifeManager.Views"
         mc:Ignorable="d"
         Title="TransactionsView" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="{Binding Title}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="24"/>
+        <StackPanel Margin="10">
+
+            <!-- 日付 -->
+            <DatePicker SelectedDate="{Binding SelectedDate}" />
+
+            <!-- ボタン -->
+            <Button Content="表示"
+                    Margin="0,10,0,10"
+                    Command="{Binding LoadCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
+
+            <!-- 一覧 -->
+            <DataGrid ItemsSource="{Binding Transactions}"
+                      AutoGenerateColumns="False"
+                      Height="200"/>
+
+            <!-- 合計 -->
+            <TextBlock Text="{Binding Total}"
+                       FontSize="20"
+                       Margin="0,10,0,0" /> 
+        </StackPanel>
     </Grid>
 </Window>

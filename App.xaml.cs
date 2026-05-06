@@ -3,20 +3,23 @@
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using LifeManager.ViewModel;
+using LifeManager.Services; 
+using LifeManager.Views;    
 
-namespace Dashboard
+namespace LifeManager
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             // ビューモデルがナビゲーションを要求するために使用するナビゲーションサービスを初期化します。
-            var navigationService = new Serviecs.NavigationService();
+            var navigationService = new NavigationService();
 
             // メインの ViewModel を作成し、ナビゲーションサービスを注入します。
             // これにより ViewModel は UI フレームワークに直接依存せずにナビゲーションを実行できます。

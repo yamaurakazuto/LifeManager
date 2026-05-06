@@ -39,7 +39,7 @@ namespace LifeManager.ViewModel
         /// </summary>
         private void OpenTransactions()
         {
-            var transactionsViewModel = new TrasactionViewModel();
+            var transactionsViewModel = new TransactionViewModel();
             _navigationService.DisplayTransactions(transactionsViewModel);
         }
 
