@@ -60,11 +60,13 @@
 
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    Text="{Binding Income, UpdateSourceTrigger=PropertyChanged}"
                     Height="50"
                     Margin="0,5,0,15"
                     materialDesign:HintAssist.Hint="収入"
                     BorderBrush="White"
-                    BorderThickness="1.5"/>
+                    BorderThickness="1.5"
+                    Foreground="White"/>
 
                 <TextBlock Text="支出"
                             FontSize="20"
@@ -72,11 +74,13 @@
 
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    Text="{Binding Expense, UpdateSourceTrigger=PropertyChanged}"
                     Height="50"
                     Margin="0,5,0,15"
                     materialDesign:HintAssist.Hint="支出"
                     BorderBrush="White"
-                    BorderThickness="1.5"/>
+                    BorderThickness="1.5"
+                    Foreground="White"/>
 
             </StackPanel>
         </Border>

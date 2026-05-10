@@ -31,7 +31,7 @@ namespace LifeManager
                 DataContext = mainViewModel
             };
 
-            mainWindow.Show();
+        
         }
     }
 

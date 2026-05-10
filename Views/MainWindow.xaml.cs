@@ -32,6 +32,6 @@ namespace LifeManager.Views
             DataContext = new MainViewModel(navigationService);
         }
 
-       
+
     }
 }

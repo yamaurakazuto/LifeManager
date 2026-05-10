@@ -25,12 +25,54 @@ namespace LifeManager.ViewModel
    
     public class TransactionViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(string name)
+        /// <summary>
+        /// プロパティ
+        /// </summary>
+
+        // 収入
+        private Decimal _Income;
+
+        public Decimal Income
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            get { return _Income; }
+            set
+            {
+                if (_Income != value)
+                {
+                    _Income = value;
+                    OnPropertyChanged(nameof(Income));
+                    OnPropertyChanged(nameof(Total)); // Totalも更新   
+                }
+
+            }
         }
+
+
+        // 支出
+        private Decimal _Expense;
+
+        public Decimal Expense
+        {
+            get { return _Expense; }
+            set
+            {
+                if (_Expense != value)
+                {
+                    _Expense = value;
+                    OnPropertyChanged(nameof(Expense));
+                    OnPropertyChanged(nameof(Total)); // Totalも更新
+                }
+            }
+        }
+
+        //合計
+        
+         public Decimal Total => Income - Expense;
+       
+
+
+
 
         public ICommand LoadCommand { get; }
 
@@ -39,8 +81,7 @@ namespace LifeManager.ViewModel
         // 現在選択されている日付        
         public DateTime SelectDate { get; set; } = DateTime.Today;
 
-        // 合計金額
-        public Decimal Total { get; set; }
+        
 
 
         //外から変更できないようにprivate setにする
@@ -59,7 +100,13 @@ namespace LifeManager.ViewModel
 
             Transactions = result.Transactions;
 
-            Total = result.Total;
+            //Total = result.Total;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
 
