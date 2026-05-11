@@ -40,6 +40,10 @@ namespace LifeManager.ViewModel
             {
                 if (_Income != value)
                 {
+                    if (value < 0)
+                    {
+                        return; // 0未満の値は無視する（エラーを表示するなどの処理も考えられる）
+                    }
                     _Income = value;
                     OnPropertyChanged(nameof(Income));
                     OnPropertyChanged(nameof(Total)); // Totalも更新   
@@ -59,6 +63,10 @@ namespace LifeManager.ViewModel
             {
                 if (_Expense != value)
                 {
+                    if (value < 0)
+                    {
+                        return; // 0未満の値は無視する（エラーを表示するなどの処理も考えられる）
+                    }
                     _Expense = value;
                     OnPropertyChanged(nameof(Expense));
                     OnPropertyChanged(nameof(Total)); // Totalも更新
