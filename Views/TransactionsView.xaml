@@ -61,7 +61,7 @@
 
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Text="{Binding Income, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0}"
+                    Text="{Binding Income, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0, ValidatesOnDataErrors=True}"
                     PreviewTextInput="NumberOnly_PreviewTextInput"   
                     DataObject.Pasting="NumberOnly_Pasting"
                     Height="50"
@@ -77,7 +77,7 @@
 
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Text="{Binding Expense, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0}"
+                    Text="{Binding Expense, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0, ValidatesOnDataErrors=True}"
                     PreviewTextInput="NumberOnly_PreviewTextInput"   
                     DataObject.Pasting="NumberOnly_Pasting"
                     Height="50"

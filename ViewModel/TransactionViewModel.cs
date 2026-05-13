@@ -23,12 +23,43 @@ namespace LifeManager.ViewModel
 {
 
    
-    public class TransactionViewModel : INotifyPropertyChanged
+    public class TransactionViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
 
         /// <summary>
         /// プロパティ
         /// </summary>
+        /// 
+
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case nameof(Income):
+                        if (Income < 0)
+                        {
+                            return "収入は0以上でなければなりません。";
+                        }
+                        break;
+                    case nameof(Expense):
+                        if (Expense < 0)
+                        {
+                            return "支出は0以上でなければなりません。";
+                        }
+                        break;
+                }
+                return null;
+            }
+        }
+
+
+
+
+
 
         // 収入
         private Decimal _Income;
