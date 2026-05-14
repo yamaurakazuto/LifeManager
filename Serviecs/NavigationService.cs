@@ -25,9 +25,9 @@ namespace LifeManager.Services
             view.Show();
         }
 
-        public void DisplayRireki(ViewModel.RirekiViewModel vm)
+        public void DisplayHistory(ViewModel.HistoryViewModel vm)
         {
-            var view = new RirekiWindow();
+            var view = new HistoryWindow();
             view.DataContext = vm;
             view.Show();
         }

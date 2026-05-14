@@ -16,7 +16,7 @@ namespace LifeManager.ViewModel
         private readonly INavigationService _navigationService;
         public ICommand NavigateToTransactionsCommand { get; }
 
-        public ICommand NavigateToRirekiCommand { get; }
+        public ICommand NavigateToHistoryCommand { get; }
 
         /// <summary>
         /// MainViewModel の新しいインスタンスを作成し、ナビゲーションを設定します。
@@ -27,7 +27,7 @@ namespace LifeManager.ViewModel
             NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
             _navigationService = navigationService;
 
-            NavigateToRirekiCommand = new RelayCommand(OpenRireki);
+            NavigateToHistoryCommand = new RelayCommand(OpenHistory         );
             _navigationService = navigationService;
         }
 
@@ -43,10 +43,10 @@ namespace LifeManager.ViewModel
             _navigationService.DisplayTransactions(transactionsViewModel);
         }
 
-        private void OpenRireki()
+        private void OpenHistory()
         {
-            var rirekiViewModel = new RirekiViewModel();
-            _navigationService.DisplayRireki(rirekiViewModel);
+            var historyViewModel = new HistoryViewModel();
+            _navigationService.DisplayHistory(historyViewModel);
         }
     }
 }

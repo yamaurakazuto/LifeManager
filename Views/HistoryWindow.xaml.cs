@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LifeManager.Views
 {
     /// <summary>
-    /// RirekiWindow.xaml の相互作用ロジック
+    /// HistoryWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class RirekiWindow : Window
+    public partial class HistoryWindow : Window
     {
-        public RirekiWindow()
+        public HistoryWindow()
         {
             InitializeComponent();
         }

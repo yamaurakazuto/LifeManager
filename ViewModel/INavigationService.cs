@@ -25,6 +25,6 @@ namespace LifeManager.ViewModel
         /// 引数の <see cref="RirekiViewModel"/> を DataContext に設定してください。
         /// </summary>
         /// <param name="vm">表示する収支履歴画面の ViewModel。</param>
-        void DisplayRireki(RirekiViewModel vm);
+        void DisplayHistory(HistoryViewModel vm);
     }
 }
