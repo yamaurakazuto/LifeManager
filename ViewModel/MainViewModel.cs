@@ -27,8 +27,7 @@ namespace LifeManager.ViewModel
             NavigateToTransactionsCommand = new RelayCommand(OpenTransactions);
             _navigationService = navigationService;
 
-            NavigateToHistoryCommand = new RelayCommand(OpenHistory         );
-            _navigationService = navigationService;
+            NavigateToHistoryCommand = new RelayCommand(OpenHistory);
         }
 
         /// <summary>
