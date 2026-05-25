@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace LifeManager.Models
 {
-    class DailySummaries
+    public class DailySummaries
     {
         public int ID { get; set; }
 
@@ -19,5 +19,10 @@ namespace LifeManager.Models
         public decimal Total { get; set; }
 
         public DateTime UpdateDate { get; set; }
+
+
+        
+           
+        
     }
 }
