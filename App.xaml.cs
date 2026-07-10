@@ -14,6 +14,15 @@ namespace LifeManager
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        // なぜ OnStartup で組み立てるのか:
+        // アプリの起動地点は「誰が誰に依存するか」を決める組み立て場所
+        // （Composition Root）としてふさわしく、依存の生成をここに
+        // 集めておくと将来 DI コンテナ導入時もこの 1 か所の変更で済むため。
+        //
+        // 注意: 現在は App.xaml の StartupUri が MainWindow を起動し、
+        // MainWindow 側のコンストラクタでも DataContext を設定しているため、
+        // ここで組み立てた mainWindow は実際には使われていない（Show していない）。
+        // 将来的には StartupUri を外し、この OnStartup に一本化する予定。
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -31,7 +40,7 @@ namespace LifeManager
                 DataContext = mainViewModel
             };
 
-        
+
         }
     }
 

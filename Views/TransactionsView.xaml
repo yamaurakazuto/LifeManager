@@ -59,7 +59,13 @@
                             FontSize="20"
                             Foreground="White"/>
 
-                <TextBox 
+                <!--
+                    UpdateSourceTrigger=PropertyChanged: 既定（フォーカス喪失時）ではなく
+                        1文字入力するたびに ViewModel へ反映させ、合計をリアルタイム更新するため。
+                    ValidatesOnDataErrors=True: ViewModel の IDataErrorInfo に検証を問い合わせ、
+                        エラー時は枠を赤くする。検証ルール自体は ViewModel 側に置き、View には持たせない。
+                -->
+                <TextBox
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     Text="{Binding Income, UpdateSourceTrigger=PropertyChanged, TargetNullValue=0, ValidatesOnDataErrors=True}"
                     PreviewTextInput="NumberOnly_PreviewTextInput"   
