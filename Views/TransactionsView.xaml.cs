@@ -36,11 +36,18 @@ namespace LifeManager.Views
             DataContext = new TransactionViewModel();
         }
 
+        // なぜこの入力制限はコードビハインドに書いてよいのか:
+        // 「数字以外のキー入力を弾く」のは業務ルールではなく純粋な UI の振る舞いのため。
+        // 一方「収入は 0 以上」のような業務ルールは ViewModel（IDataErrorInfo）側に置く。
+        // PreviewTextInput を使うのは、値がバインディングに渡る前の
+        // キー入力段階で不正文字を止められるから。
         private void NumberOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
+        // PreviewTextInput は貼り付け（Ctrl+V）を通してしまうため、
+        // 貼り付け経路も別途 Pasting イベントで塞ぐ必要がある。
         private void NumberOnly_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(string)))

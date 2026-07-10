@@ -1,5 +1,10 @@
 ﻿// INavigationService の実装です。ビューのインスタンスを生成し、
 // 提供された ViewModel を DataContext に設定してウィンドウを表示する責任を持ちます。
+//
+// なぜこのクラスだけが View（Window）を new してよいのか:
+// 「どの Window クラスを使うか」という View の知識をここに閉じ込めることで、
+// ViewModel 側は INavigationService という抽象しか知らずに済む。
+// View への依存をアプリ全体に散らばらせないための「境界役」がこのクラス。
 using LifeManager.Views;
 using System;
 using System.Collections.Generic;
@@ -21,6 +26,9 @@ namespace LifeManager.Services
         {
             var view = new TransactionsView();
 
+            // DataContext に ViewModel を設定するのは、XAML 側の {Binding ...} が
+            // このオブジェクトのプロパティを参照して表示を組み立てるため。
+            // View と ViewModel はこの 1 行だけで結び付き、互いのコードは知らないままでいられる。
             view.DataContext = vm;
             view.Show();
         }
