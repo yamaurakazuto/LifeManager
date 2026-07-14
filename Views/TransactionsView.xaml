@@ -40,7 +40,7 @@
 
             <StackPanel>
 
-                <!-- 日付 -->
+                <!-- 日付の入力欄。選択値は ViewModel の SelectDate へバインドする。 -->
                 <TextBlock Text="日付"
                    Foreground="White"
                    FontSize="20"
@@ -60,10 +60,12 @@
                             Foreground="White"/>
 
                 <!--
-                    UpdateSourceTrigger=PropertyChanged: 既定（フォーカス喪失時）ではなく
-                        1文字入力するたびに ViewModel へ反映させ、合計をリアルタイム更新するため。
-                    ValidatesOnDataErrors=True: ViewModel の IDataErrorInfo に検証を問い合わせ、
-                        エラー時は枠を赤くする。検証ルール自体は ViewModel 側に置き、View には持たせない。
+                    なぜ UpdateSourceTrigger=PropertyChanged か:
+                        既定（フォーカス喪失時）ではなく 1 文字ごとに ViewModel へ反映させ、
+                        導出プロパティの合計をリアルタイムに更新させるため。
+                    なぜ ValidatesOnDataErrors=True か:
+                        検証を ViewModel の IDataErrorInfo に問い合わせ、エラー時に枠を赤くするため。
+                        検証ルール自体は ViewModel 側に置き、View には判定を持たせない。
                 -->
                 <TextBox
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -96,7 +98,7 @@
             </StackPanel>
         </Border>
         
-        <!-- ボタン -->
+        <!-- 表示ボタン。押下を ViewModel の LoadCommand へ委ね、一覧取得を実行させる。 -->
             <Button Content="表示"
                     Margin="0,10,0,10"
                     Command="{Binding LoadCommand}"
@@ -105,7 +107,7 @@
                     Grid.Row="3"
                     Grid.ColumnSpan="2"/>
 
-            <!-- 一覧 -->
+            <!-- 取引一覧。ViewModel の Transactions にバインドし、状態変化に追従して表示する。 -->
         <DataGrid ItemsSource="{Binding Transactions}"
                       AutoGenerateColumns="False"
                       Background="LightBlue"
@@ -115,7 +117,7 @@
                       Grid.ColumnSpan="2"
                       Grid.RowSpan="3"/>    
 
-        <!-- 合計 -->
+        <!-- 合計表示エリア。値は ViewModel の導出プロパティ Total にバインドする。 -->
         <Border
             Grid.Column="0"
             Grid.Row="4"
@@ -136,7 +138,7 @@
                 
             
 
-               <!-- 合計ラベル -->
+               <!-- 合計の見出し（固定文言。金額本体は右隣の Total バインドで表示）。 -->
         <TextBlock Text="合計"
                    Foreground="White"
                    FontSize="18"

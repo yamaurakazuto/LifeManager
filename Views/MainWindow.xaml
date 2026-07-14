@@ -24,9 +24,9 @@
             
             <StackPanel>
                 <!--
-                    Click イベントではなく Command でバインドする理由:
-                    クリック時の処理を ViewModel（MainViewModel）側に置けるので、
-                    コードビハインドが空のまま保て、画面の動作を UI なしでテストできる。
+                    なぜ Click ではなく Command でバインドするのか:
+                    ボタン操作の処理を ViewModel（MainViewModel）側へ置けるため。
+                    コードビハインドを空に保て、画面の動作を UI なしでテストできる。
                 -->
                 <Button Content="収支管理画面"
                         Margin="10"

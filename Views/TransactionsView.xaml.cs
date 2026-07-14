@@ -1,7 +1,7 @@
-﻿// 収支画面ウィンドウのコードビハインドです。
-// このファイルには TransactionsView.xaml の相互作用ロジックが含まれます。
-// ビューの DataContext は NavigationService によって提供される
-// `TrasactionViewModel` のインスタンスであることを想定しています。
+﻿// 収支画面のコードビハインド。
+// 表示する状態は TransactionViewModel が持ち、View はバインディングで表示するだけに保つ。
+// ここに置くのは「数字だけ入力させる」といった純粋な UI の振る舞いに限り、
+// 業務ルール（収入は 0 以上 等）は ViewModel 側へ寄せることで層の責務を混ぜない。
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +21,11 @@ using System.Text.RegularExpressions;
 
 namespace LifeManager.Views
 {
-    /// <summary>
-    /// TransactionsView.xaml の相互作用ロジック
-    /// </summary>
     public partial class TransactionsView : Window
     {
         /// <summary>
-        /// TransactionsView ウィンドウの新しいインスタンスを初期化します。
-        /// コンストラクタは InitializeComponent を呼び出して XAML を読み込みます。
+        /// TransactionsView を初期化する。XAML を読み込み、DataContext に
+        /// TransactionViewModel を設定してバインディングの起点を用意する。
         /// </summary>
         public TransactionsView()
         {
@@ -36,18 +33,19 @@ namespace LifeManager.Views
             DataContext = new TransactionViewModel();
         }
 
-        // なぜこの入力制限はコードビハインドに書いてよいのか:
+        // なぜこの入力制限だけコードビハインドに置いてよいのか:
         // 「数字以外のキー入力を弾く」のは業務ルールではなく純粋な UI の振る舞いのため。
-        // 一方「収入は 0 以上」のような業務ルールは ViewModel（IDataErrorInfo）側に置く。
-        // PreviewTextInput を使うのは、値がバインディングに渡る前の
-        // キー入力段階で不正文字を止められるから。
+        // 「収入は 0 以上」のような業務ルールは ViewModel（IDataErrorInfo）側に置く。
+        // PreviewTextInput を使うのは、値がバインディングへ渡る前のキー入力段階で
+        // 不正文字を止められるから。
         private void NumberOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
-        // PreviewTextInput は貼り付け（Ctrl+V）を通してしまうため、
-        // 貼り付け経路も別途 Pasting イベントで塞ぐ必要がある。
+        // なぜ貼り付けを別に塞ぐのか:
+        // PreviewTextInput は貼り付け（Ctrl+V）経由の入力を通してしまうため、
+        // 貼り付け経路は Pasting イベントで別途チェックしないと数字以外が混入するから。
         private void NumberOnly_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(string)))

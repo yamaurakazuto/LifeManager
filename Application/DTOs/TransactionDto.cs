@@ -1,10 +1,10 @@
-﻿// 1件の収支（取引）を表す DTO です。
+﻿// 1 件の収支（取引）を表す DTO。UseCase から ViewModel へ渡し、View が表示する単位。
 //
-// なぜ Model（DailySummaries）をそのまま UI に渡さず DTO を挟むのか:
-// ・UI が必要とする形とデータベースの形は一致しないことが多く、
-//   直接渡すと「DB の都合」が画面まで伝染してしまうため
-// ・層の境界を DTO で区切っておけば、DB スキーマを変更しても
-//   影響を Application 層までで食い止められるため
+// なぜ Model（DailySummaries）をそのまま UI へ渡さず DTO を挟むのか:
+// ・UI が求める形と DB の形は一致しないことが多く、Model を直接渡すと
+//   「DB の都合」が画面まで伝染してしまうため。
+// ・層の境界を DTO で区切っておけば、DB スキーマを変えても影響を
+//   Application 層で食い止められ、ViewModel／View に波及させずに済むため。
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +18,8 @@ namespace LifeManager.Application.DTOs
         public DateTime Date { get; set; }
 
         // なぜ decimal か:
-        // float/double は 2 進数の近似値で保持するため金額計算で誤差が出る。
-        // 金銭を扱うプロパティは 10 進数で正確に表現できる decimal を使う。
+        // float/double は値を 2 進数の近似で保持するため金額計算で誤差が出る。
+        // 金銭は 10 進数で正確に表せる decimal を使い、集計時の誤差を防ぐ。
         public decimal Amount { get; set; }
     }
 }
