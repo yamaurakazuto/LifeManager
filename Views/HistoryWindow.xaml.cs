@@ -14,13 +14,10 @@ using System.Windows.Shapes;
 
 namespace LifeManager.Views
 {
-    /// <summary>
-    /// HistoryWindow.xaml の相互作用ロジック
-    /// </summary>
-    // コードビハインドが InitializeComponent だけなのは意図的。
-    // 表示するデータは NavigationService が DataContext に設定する
-    // HistoryViewModel が持ち、View はバインディングで表示するだけにする。
-    // ロジックをここに書かないことで、画面の動作を ViewModel 側でテストできる。
+    // なぜコードビハインドが InitializeComponent だけなのか（意図的）:
+    // 表示データは NavigationService が DataContext に差す HistoryViewModel が持ち、
+    // View はバインディングで表示するだけにする。ロジックをここへ書かないことで、
+    // 画面の動作を UI 抜きに ViewModel 側でテストできる（MVVM の理想形）。
     public partial class HistoryWindow : Window
     {
         public HistoryWindow()

@@ -1,7 +1,8 @@
-﻿// メインウィンドウのコードビハインドです。
-// このファイルには `MainWindow` の最小限の相互作用ロジックが含まれ、
-// 動作は `MainViewModel` へのデータバインディングに依存します。
-// 必要に応じて UI イベントハンドラはここに配置します。
+﻿// メインウィンドウのコードビハインド。
+// なぜここを薄く保つのか:
+// 画面の振る舞いは MainViewModel へのバインディングに委ね、コードビハインドには
+// ロジックを持たせない。こうすることで動作を ViewModel 側でテストでき、
+// View は表示だけに専念できる（MVVM の基本方針）。
 using LifeManager.Services;
 using LifeManager.ViewModel;
 using System.Data.SqlClient;
@@ -23,26 +24,29 @@ namespace LifeManager.Views
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// MainWindow の新しいインスタンスを初期化し、XAML を読み込みます。
+        /// MainWindow を初期化する。XAML を読み込み、バインドの起点となる
+        /// DataContext（MainViewModel）をここで一度だけ設定する。
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
-            // View が ViewModel の「型」を知って生成するのはここだけに限定する。
-            // XAML の {Binding ...} はこの DataContext を参照して動くため、
-            // これ以降 View と ViewModel はプロパティ名だけで疎結合につながる。
+            // なぜ View が ViewModel を生成するのがここだけなのか:
+            // XAML の {Binding ...} はこの DataContext を起点に解決される。
+            // 生成をコンストラクタの 1 か所に限定すれば、以降 View と ViewModel は
+            // プロパティ名だけで結び付き、互いの実装を知らない疎結合を保てる。
             var navigationService = new NavigationService();
 
             DataContext = new MainViewModel(navigationService);
 
-            // ここからの DB 接続は「SQL Server につながるか」を確認するための一時コード。
-            // 本来 DB アクセスは Repository 層の責務であり、View に置くと
-            // MVVM の層分離が崩れるため、Repository 実装後にそちらへ移動する予定。
+            // 【暫定コード】DB 接続の疎通確認。
+            // 本来 DB アクセスは Repository 層の責務で、View に置くと MVVM の層分離が崩れる。
+            // Repository 実装後にこの処理はそちらへ移し、View から取り除く予定。
             var connectionString = "Server=localhost;Database=LifeManager;Trusted_Connection=True;";
 
-            // using を付ける理由: DB 接続は OS リソースを掴むため、
-            // スコープを抜けたら確実に Dispose（切断）させる必要がある。
+            // なぜ using を付けるのか:
+            // DB 接続は OS リソースを掴むため、スコープを抜けたら確実に Dispose（切断）して
+            // 接続の解放漏れを防ぐ必要がある。
             using var connection = new SqlConnection(connectionString);
             connection.Open();
 

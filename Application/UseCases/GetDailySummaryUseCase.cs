@@ -1,9 +1,10 @@
-﻿// 「指定した日付の収支サマリーを取得する」というユースケースを表すクラスです。
+﻿// 「指定日の収支サマリーを取得する」という業務操作を表す UseCase。
 //
 // なぜ UseCase という単位で切り出すのか:
-// ・「日次サマリーの取得」という業務上の操作を 1 クラス 1 責務で表現するため
-// ・取得と集計のロジックを ViewModel から追い出すことで、
-//   UI なしでビジネスロジックをテストできるようにするため
+// ・業務上の 1 操作を「1 クラス 1 責務」で表し、呼び出し側（ViewModel）から
+//   手順の詳細を隠すため。
+// ・取得と集計のロジックを ViewModel の外へ出すことで、UI 無しで業務ロジックを
+//   テストでき、画面が変わってもロジックを再利用できるようにするため。
 using LifeManager.Application.DTOs;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,10 @@ namespace LifeManager.Application.UseCases
     {
         public DailySummaryDto Execute(DateTime date)
         {
-            // 現段階ではダミーデータを返している。
-            // 先に「UseCase が DTO を返す」という層の形を固めておけば、
-            // 後で Repository 経由の DB 取得に差し替えても呼び出し側（ViewModel）は変更不要。
+            // なぜ今はダミーデータなのか:
+            // 先に「UseCase が DTO を返す」という層の境界を固めておけば、
+            // 後で中身を Repository 経由の DB 取得へ差し替えても、
+            // 戻り値の形（DTO）が同じなら呼び出し側（ViewModel）は無変更で済むため。
             var trancactions = new List<TransactionDto>
             {
                 new TransactionDto { Date = date, Amount = 100},
@@ -30,9 +32,10 @@ namespace LifeManager.Application.UseCases
             {
                 Transactions = trancactions,
 
-                // 合計はここで計算して DTO に詰める。
-                // ViewModel に計算させると「表示」と「集計ルール」が混ざり、
-                // 画面ごとに集計ロジックが重複していく原因になるため。
+                // なぜ合計を UseCase 側で計算して DTO に詰めるのか:
+                // 集計を ViewModel にやらせると「表示」と「集計ルール」が混ざり、
+                // 画面が増えるたびに同じ集計ロジックが重複していくため。
+                // 集計ルールは UseCase に一本化し、ViewModel は結果を受け取るだけにする。
                 Total = trancactions.Sum(x => x.Amount)
             };
 
